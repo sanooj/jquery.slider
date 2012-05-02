@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<title>Demo Slider</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+	<script src="scripts/jquery.slider.js" ></script>
+	<script type="text/javascript">
+	$(function() {
+		$('#slideshow').jqSlider({slideWidth:600})
+	});
+	</script>
+	<style type="text/css">
+	body {
+		padding: 0;
+	}
+	#slideshow {
+		width:600px;
+		margin: 0 auto;
+		position: relative;
+	}
+	#slidesContainer {
+		height:200px;
+	}
+	.control {
+		cursor: pointer;
+	}
+	</style>
+</head>
+<body>
+<div id="slideshow">
+    <div id="slidesContainer">
+    	<div class="slide">
+    		Demo Content
+    	</div>
+    	<div class="slide">
+    		Demo Content
+    	</div>
+    	<div class="slide">
+    		Demo Content
+    	</div>
+    </div>
+</div>
+</body>
+</html>
