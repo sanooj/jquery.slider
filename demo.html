@@ -6,7 +6,7 @@
 	<script src="scripts/jquery.slider.js" ></script>
 	<script type="text/javascript">
 	$(function() {
-		$('#slideshow').jqSlider({slideWidth:600})
+		$('#slideshow').jqSlider({slideWidth:550})
 	});
 	</script>
 	<style type="text/css">
@@ -14,15 +14,31 @@
 		padding: 0;
 	}
 	#slideshow {
-		width:600px;
+		width:610px;
 		margin: 0 auto;
 		position: relative;
 	}
 	#slidesContainer {
-		height:200px;
+		position: relative;
+		margin: 0px auto;
 	}
 	.control {
 		cursor: pointer;
+		width: 30px;
+		height:77px;
+		position: absolute;
+		top:50%;
+		margin-top: -39px;
+		text-indent:-9999px;
+		overflow: hidden;
+	}
+	#leftControl {
+		background:url(img/btn_prev.gif);
+		left:0;
+	}
+	#rightControl {
+		background:url(img/btn_next.gif);
+		right:0;
 	}
 	</style>
 </head>
@@ -30,13 +46,13 @@
 <div id="slideshow">
     <div id="slidesContainer">
     	<div class="slide">
-    		Demo Content
+    		<img src="img/banner01.jpg" alt="banner image" />
     	</div>
     	<div class="slide">
-    		Demo Content
+    		<img src="img/banner02.jpg" alt="banner image" />
     	</div>
     	<div class="slide">
-    		Demo Content
+    		<img src="img/banner03.jpg" alt="banner image" />
     	</div>
     </div>
 </div>

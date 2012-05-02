@@ -13,11 +13,11 @@
 
     this.each(function() { 
 
-      var obj             =   $(this);
-      var currentPosition =   0;
-      var slideWidth      =   options.slideWidth;
-      var slides          =   $('.slide',obj);
-      var numberOfSlides  =   slides.length;
+      var obj             =   $(this); // object
+      var currentPosition =   0; // initial position
+      var slideWidth      =   options.slideWidth; // assigned Slide Width
+      var slides          =   $('.slide',obj); // slide variable
+      var numberOfSlides  =   slides.length; // Number of Slides
 
       // Remove scrollbar in JS
       $('#slidesContainer',obj).css({'overflow':'hidden', 'width' : slideWidth});
