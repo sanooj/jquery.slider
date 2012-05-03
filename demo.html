@@ -6,7 +6,11 @@
 	<script src="scripts/jquery.slider.js" ></script>
 	<script type="text/javascript">
 	$(function() {
-		$('#slideshow').jqSlider({slideWidth:550})
+		$('#slideshow').jqSlider({
+						slideWidth:550,
+						auto:true,
+						clickPause:true
+						})
 	});
 	</script>
 	<style type="text/css">
@@ -18,7 +22,7 @@
 		margin: 0 auto;
 		position: relative;
 	}
-	#slidesContainer {
+	#slidePanel {
 		position: relative;
 		margin: 0px auto;
 	}
@@ -44,7 +48,7 @@
 </head>
 <body>
 <div id="slideshow">
-    <div id="slidesContainer">
+    <div id="slidePanel">
     	<div class="slide">
     		<img src="img/banner01.jpg" alt="banner image" />
     	</div>

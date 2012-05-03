@@ -1,68 +1,104 @@
 (function($) {
 
   $.fn.jqSlider = function(options) {
-    
+
     // default configuration properties
-    var defaults = {      
-      auto         :    false,    
-      slideWidth   :    900
-    }; 
-    
-    var options = $.extend(defaults, options);  
-    
+    var defaults = {
+      auto        : false, // Auto slide onload
+      slideWidth  : 900, // Slider Width
+      clickPause  : false // slide pause onclick controls
+    };
 
-    this.each(function() { 
+    var options   =  $.extend(defaults, options);
 
-      var obj             =   $(this); // object
-      var currentPosition =   0; // initial position
-      var slideWidth      =   options.slideWidth; // assigned Slide Width
-      var slides          =   $('.slide',obj); // slide variable
-      var numberOfSlides  =   slides.length; // Number of Slides
+
+    this.each(function() {
+
+      var obj             = $(this); // object
+      var currentPosition = 0; // initial position
+      var slideWidth      = options.slideWidth; // assigned Slide Width
+      var slides          = $('.slide', obj); // slide variable
+      var nos  = slides.length; // Number of Slides
 
       // Remove scrollbar in JS
-      $('#slidesContainer',obj).css({'overflow':'hidden', 'width' : slideWidth});
+      $('#slidePanel', obj).css({
+        'overflow'  : 'hidden',
+        'width'     :  slideWidth
+      });
 
-      // Wrap all .slides with #slideInner div
-      slides
-        .wrapAll('<div id="slideInner"></div>')
-        // Float left to display horizontally, readjust .slides width
-    	.css({
-          'float' : 'left',
-          'width' : slideWidth
-        });
+      // Wrap all .slides with #innerPanel div
+      slides.
+        wrapAll('<div id="innerPanel"></div>')
+      // Float left to display horizontally, readjust .slides width
+      .css({
+        'float': 'left',
+        'width': slideWidth
+      });
 
-      // Set #slideInner width equal to total width of all slides
-      $('#slideInner').css('width', slideWidth * numberOfSlides);
+      // Set #innerPanel width equal to total width of all slides
+      $('#innerPanel').css('width', slideWidth * nos);
 
       // Insert controls in the DOM
-      obj
-        .prepend('<span class="control" id="leftControl">left</span>')
-        .append('<span class="control" id="rightControl">right</span>');
+      obj.
+        prepend('<span class="control" id="leftControl">left</span>').append('<span class="control" id="rightControl">right</span>');
 
       // Hide left arrow control on first load
       manageControls(currentPosition);
 
       // Create event listeners for .controls clicks
-      $('.control')
-        .bind('click', function(){
+      $('.control').bind('click', function() {
         // Determine new position
-    	currentPosition = ($(this).attr('id')=='rightControl') ? currentPosition+1 : currentPosition-1;
-        
-    	// Hide / show controls
+        currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+        if(options.clickPause)
+        {
+          clearInterval(t)
+        }
+        // Hide / show controls
         manageControls(currentPosition);
-        // Move slideInner using margin-left
-        $('#slideInner').animate({
-          'marginLeft' : slideWidth*(-currentPosition)
+        // Move innerPanel using margin-left
+        $('#innerPanel').animate({
+          'marginLeft': slideWidth * (-currentPosition)
         });
       });
 
-      // manageControls: Hides and Shows controls depending on currentPosition
-      function manageControls(position){
-        // Hide left arrow if position is first slide
-    	if(position==0){ $('#leftControl').hide() } else{ $('#leftControl').show() }
-    	// Hide right arrow if position is last slide
-        if(position==numberOfSlides-1){ $('#rightControl').hide() } else{ $('#rightControl').show() }
+
+      if(options.auto)
+      {
+        var t = setInterval(autoslide, 6000);
       }
+
+      function autoslide() {
+          currentPosition = currentPosition + 1;
+
+          if (currentPosition == nos ) {
+              currentPosition = 0;
+          }
+
+          // Hide / show controls
+          manageControls(currentPosition);
+
+          // Move innerPanel using margin-left
+          $('#innerPanel').animate({
+            'marginLeft': slideWidth * (-currentPosition)
+          });
+        }
+
+      // manageControls: Hides and Shows controls depending on currentPosition
+      function manageControls(position) {
+        // Hide left arrow if position is first slide
+        if (position == 0) {
+          $('#leftControl').hide()
+        } else {
+          $('#leftControl').show()
+        }
+        // Hide right arrow if position is last slide
+        if (position == nos - 1) {
+          $('#rightControl').hide()
+        } else {
+          $('#rightControl').show()
+        }
+      }
+
     });
   };
 })(jQuery);
